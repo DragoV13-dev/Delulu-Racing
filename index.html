@@ -11,32 +11,83 @@
       background: linear-gradient(135deg, #000, #c00);
       color: #fff;
       min-height: 100vh;
-    }
-    header {
-      background-color: rgba(204, 0, 0, 0.85);
-      padding: 1rem;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
     }
+
+    /* Boczny panel */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 1rem;
+    }
+
     .logo {
-      font-size: 1.5rem;
+      font-size: 2.5rem;
       font-weight: bold;
       letter-spacing: 2px;
+      margin-bottom: 2rem;
+      text-align: center;
+      text-shadow: 0 0 5px #ff0000, 0 0 15px #ff3b3b;
     }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin-left: 1rem;
+
+    .menu-item {
+      position: relative;
+      width: 150px;
+      height: 100px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .menu-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .menu-item:hover img {
+      transform: scale(1.1);
+      filter: brightness(0.6);
+    }
+
+    .menu-item span {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      background: rgba(0,0,0,0.6);
+      padding: 0.3rem;
       font-weight: bold;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
-    nav a:hover { text-decoration: underline; }
-    main { padding: 2rem; }
+
+    .menu-item:hover span {
+      opacity: 1;
+    }
+
+    main {
+      margin-left: 220px;
+      padding: 2rem;
+      flex: 1;
+    }
+
     section { display: none; }
     section.active { display: block; }
+
     #home {
       text-align: center;
-      margin-top: 5rem;
+      margin-top: 2rem;
     }
     #home img {
       width: 300px;
@@ -84,14 +135,27 @@
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo">🏎️ Delulu Racing</div>
-    <nav>
-      <a href="#" onclick="showSection('home')">Strona główna</a>
-      <a href="#" onclick="showSection('tabela')">Tabela punktowa</a>
-      <a href="#" onclick="showSection('kalendarz')">Kalendarz wyścigów</a>
-    </nav>
-  </header>
+  <!-- Boczny panel -->
+  <div class="sidebar">
+    <div class="logo">Delulu Racing🏎️</div>
+    <div class="menu-item" onclick="showSection('home')">
+      <img src="https://cdn.pixabay.com/photo/2023/08/12/08/46/ai-generated-8185136_1280.png" alt="Strona główna">
+      <span>Strona główna</span>
+    </div>
+    <div class="menu-item" onclick="showSection('tabela')">
+      <img src="https://cdn.pixabay.com/photo/2024/03/11/07/43/ai-generated-8626048_1280.png" alt="Tabela punktowa">
+      <span>Tabela punktowa</span>
+    </div>
+    <div class="menu-item" onclick="showSection('kalendarz')">
+      <img src="https://cdn.pixabay.com/photo/2024/03/11/07/43/ai-generated-8626044_1280.png" alt="Kalendarz wyścigów">
+      <span>Kalendarz wyścigów</span>
+    </div>
+    <div class="menu-item" onclick="showSection('regulamin')">
+      <img src="https://cdn.pixabay.com/photo/2015/03/22/10/31/clause-684509_1280.jpg" alt="Regulamin">
+      <span>Regulamin</span>
+    </div>
+  </div>
+
   <main>
     <section id="home" class="active">
       <h1>Witaj na stronie Ligi Delulu Racing</h1>
@@ -102,8 +166,9 @@
         <img src="https://www.autoblog.com/.image/w_3840%2Cq_auto%3Agood%2Cc_fill%2Car_4%3A3/MjA5MDg4OTYyODk5MjI0NDIw/ferrari2024car.jpg" alt="Ferrari bolid F1">
       </div>
     </section>
+
     <section id="tabela">
-      <h2>Tabela punktowa zawodników</h2>
+      <h2>🏆Tabela punktowa zawodników</h2>
       <table>
         <thead>
           <tr>
@@ -136,8 +201,9 @@
         </tbody>
       </table>
     </section>
+
     <section id="kalendarz">
-      <h2>Kalendarz wyścigów</h2>
+      <h2>📅Kalendarz wyścigów</h2>
       <table>
         <thead>
           <tr>
@@ -152,7 +218,20 @@
         </tbody>
       </table>
     </section>
+
+    <section id="regulamin">
+      <h2>📜Regulamin Ligi Delulu Racing</h2>
+      <ol>
+        <li>Zachowajmy większy szacunek dla siebie na torze, nie wpierdalajmy się na siłę, jesteś wolniejszy - czasem lepiej odpuścić pozycję i się utrzymywać w DRS niż na siłę się łokciami rozpychać.</li>
+        <li>Zostawiajmy sobie miejsce na torze, każdy, nawet jeżeli się jedzie pierwszy, dobrze jest je zostawić.</li>
+        <li>Więcej rozmów, a nie wyzywania od kurew po incydencie, bo też fajnie na spokojnie porozmawiać i obgadać co się źle zrobiło, żeby wyciągnąć lekcję – tak się kiedyś rozwiązywało incydenty na GG XD.</li>
+        <li>Pamiętajmy o 1 zmianie toru jazdy przy hamowaniu.</li>
+        <li>Brak zmiany kierunku jazdy podczas hamowania. Hamujesz po wewnętrznej – nie zjeżdżasz na zewnętrzną. Chyba że dyktowała to twoja linia jazdy i masz na 100% miejsce.</li>
+        <li>Nie bądź kurwa i cwelem, nie jesteś sam na torze.</li>
+      </ol>
+    </section>
   </main>
+
   <script>
     function showSection(id) {
       document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
