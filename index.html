@@ -26,6 +26,7 @@
       flex-direction: column;
       align-items: center;
       padding-top: 1rem;
+      z-index: 1000;
     }
 
     .logo {
@@ -85,16 +86,109 @@
     section { display: none; }
     section.active { display: block; }
 
+    /* Karty zespołów */
+    .teams-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .team-card {
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 15px;
+      width: 250px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    /* Efekty kolorystyczne na hover */
+    .team-card.redbull:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #ff0000, 0 0 40px #0026ff;
+    }
+    .team-card.mercedes:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #00f2ff, 0 0 40px #005a5a;
+    }
+    .team-card.ferrari:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #ff0000, 0 0 40px #a00000;
+    }
+    .team-card.mclaren:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #ff8000, 0 0 40px #ff4000;
+    }
+    .team-card.aston:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #4caf50, 0 0 40px #087f23;
+    }
+    .team-card.alpine:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #0057ff, 0 0 40px #003d99;
+    }
+    .team-card.williams:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #0070bb, 0 0 40px #004466;
+    }
+    .team-card.haas:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #c8102e, 0 0 40px #7a0b1f;
+    }
+    .team-card.rbft:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #ff6600, 0 0 40px #cc5200;
+    }
+    .team-card.stake:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #009688, 0 0 40px #00675b;
+    }
+
+    .team-info {
+      padding: 1rem;
+    }
+
+    .team-info h3 {
+      margin: 0.5rem 0;
+      font-size: 1.2rem;
+      color: #ff4d4d;
+    }
+
+    /* Styl listy kierowców */
+    .drivers-list {
+      list-style: disc inside;
+      margin: 0 1rem 1rem 1rem;
+      padding-left: 1rem;
+      color: #ccc;
+      text-align: left;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .drivers-list.open {
+      max-height: 200px; /* wystarczająco by pomieścić listę */
+    }
+
     #home {
       text-align: center;
       margin-top: 2rem;
     }
+
     #home img {
       width: 300px;
       margin: 1rem;
       border-radius: 10px;
       box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      max-width: 90vw;
+      height: auto;
     }
+
     table {
       border-collapse: collapse;
       width: 100%;
@@ -132,6 +226,76 @@
     .bronze td {
       background: linear-gradient(135deg, #e09c57, #8a5325);
     }
+
+
+    /* Responsywność dla ekranów do 600px szerokości (smartfony) */
+    @media (max-width: 600px) {
+
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0;
+        background: rgba(0,0,0,0.85);
+        z-index: 1000;
+      }
+
+      .logo {
+        display: none; /* ukryj logo na małych ekranach */
+      }
+
+      .menu-item {
+        width: 50px;
+        height: 50px;
+        margin: 0;
+        border-radius: 8px;
+      }
+
+      .menu-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: drop-shadow(0 0 2px black);
+      }
+
+      .menu-item span {
+        display: none; /* ukryj tekst menu, zostają same ikonki */
+      }
+
+      main {
+        margin: 70px 10px 20px 10px; /* miejsce pod menu u góry */
+        padding: 0;
+      }
+
+      .teams-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .team-card {
+        width: 90%;
+      }
+
+      #home img {
+        width: 90%;
+        margin: 0.5rem auto;
+      }
+
+      table {
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -160,50 +324,144 @@
     <section id="home" class="active">
       <h1>Witaj na stronie Ligi Delulu Racing</h1>
       <p>Śledź wyniki, kalendarz wyścigów i poczuj adrenalinę rywalizacji!</p>
-      <div>
+
+      <!-- Nowa sekcja z kartami zespołów -->
+      <div class="teams-container">
+
+        <div class="team-card redbull" onclick="toggleDrivers(this)">
+          <div class="team-info">
+            <h3>Red Bull Racing</h3>
+          </div>
+          <ul class="drivers-list">
+            <li>Max Verstappen</li>
+            <li>Yuki Tsunoda</li>
+          </ul>
+        </div>
+
+        <div class="team-card ferrari" onclick="toggleDrivers(this)">
+          <div class="team-info">
+            <h3>Scuderia Ferrari</h3>
+          </div>
+          <ul class="drivers-list">
+            <li>Charles Leclerc</li>
+            <li>Lewis Hamilton</li>
+          </ul>
+        </div>
+
+        <div class="team-card mclaren" onclick="toggleDrivers(this)">
+          <div class="team-info">
+            <h3>McLaren Racing</h3>
+          </div>
+          <ul class="drivers-list">
+            <li>Lando Norris</li>
+            <li>Oscar Piastri</li>
+          </ul>
+        </div>
+
+        <div class="team-card mercedes" onclick="toggleDrivers(this)">
+          <div class="team-info">
+            <h3>Mercedes-AMG Petronas</h3>
+          </div>
+          <ul class="drivers-list">
+            <li>George Russell</li>
+            <li>Andrea Kimi Antonelli</li>
+          </ul>
+        </div>
+
+        <div class="team-card aston" onclick="toggleDrivers(this)">
+          <div class="team-info">
+            <h3>Aston Martin Aramco</h3>
+          </div>
+          <ul class="drivers-list">
+            <li>Fernando Alonso</li>
+            <li>Lance Stroll</li>
+          </ul>
+        </div>
+
+        <div class="team-card alpine" onclick="toggleDrivers(this)">
+          <div class="team-info">
+            <h3>Alpine F1 Team</h3>
+          </div>
+          <ul class="drivers-list">
+            <li>Pierre Gasly</li>
+            <li>Franco Colapinto</li>
+          </ul>
+        </div>
+
+        <div class="team-card williams" onclick="toggleDrivers(this)">
+          <div class="team-info">
+            <h3>Williams Racing</h3>
+          </div>
+          <ul class="drivers-list">
+            <li>Alexander Albon</li>
+            <li>Carlos Sainz</li>
+          </ul>
+        </div>
+
+        <div class="team-card haas" onclick="toggleDrivers(this)">
+          <div class="team-info">
+            <h3>Haas F1 Team</h3>
+          </div>
+          <ul class="drivers-list">
+            <li>Esteban Ocon</li>
+            <li>Oliver Bearman</li>
+          </ul>
+        </div>
+
+        <div class="team-card rbft" onclick="toggleDrivers(this)">
+          <div class="team-info">
+            <h3>RB F1 Team</h3>
+          </div>
+          <ul class="drivers-list">
+            <li>Liam Lawson</li>
+            <li>Isack Hadjar</li>
+          </ul>
+        </div>
+
+        <div class="team-card stake" onclick="toggleDrivers(this)">
+          <div class="team-info">
+            <h3>Stake F1 Team KICK Sauber</h3>
+          </div>
+          <ul class="drivers-list">
+            <li>Nico Hülkenberg</li>
+            <li>Gabriel Bortoleto</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Zdjęcia ze strony startowej -->
         <img src="https://cdn.pixabay.com/photo/2017/08/10/12/53/f1-2622387_1280.jpg" alt="RedBull bolid F1">
         <img src="https://cdn.pixabay.com/photo/2018/02/21/02/25/f1-3169297_1280.jpg" alt="Mercedes bolid F1">
         <img src="https://www.autoblog.com/.image/w_3840%2Cq_auto%3Agood%2Cc_fill%2Car_4%3A3/MjA5MDg4OTYyODk5MjI0NDIw/ferrari2024car.jpg" alt="Ferrari bolid F1">
-      </div>
     </section>
 
     <section id="tabela">
-      <h2>🏆Tabela punktowa zawodników</h2>
+      <h2>Tabela punktowa</h2>
       <table>
         <thead>
           <tr>
-            <th>Pozycja</th>
-            <th>Zawodnik</th>
+            <th>Miejsce</th>
+            <th>Kierowca</th>
             <th>Punkty</th>
           </tr>
         </thead>
         <tbody>
           <tr class="gold">
-            <td>🥇</td>
-            <td>Niko</td>
-            <td>150</td>
+            <td>1</td><td>Max Verstappen</td><td>320</td>
           </tr>
           <tr class="silver">
-            <td>🥈</td>
-            <td>Dastin</td>
-            <td>140</td>
+            <td>2</td><td>Charles Leclerc</td><td>280</td>
           </tr>
           <tr class="bronze">
-            <td>🥉</td>
-            <td>Pestek</td>
-            <td>130</td>
+            <td>3</td><td>Lewis Hamilton</td><td>250</td>
           </tr>
-          <tr>
-            <td>4</td>
-            <td>Drago</td>
-            <td>120</td>
-          </tr>
+          <!-- więcej wierszy -->
         </tbody>
       </table>
     </section>
 
     <section id="kalendarz">
-      <h2>📅Kalendarz wyścigów</h2>
+      <h2>Kalendarz wyścigów</h2>
       <table>
         <thead>
           <tr>
@@ -212,15 +470,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>14.08.2025</td><td>Texas</td></tr>
+          <tr>
+          <tr><td>14.08.2025</td><td>Teksas</td></tr>
           <tr><td>17.08.2025</td><td>Meksyk</td></tr>
           <tr><td>17.08.2025</td><td>Brazylia</td></tr>
+          </tr>
+          <!-- więcej wierszy -->
         </tbody>
       </table>
     </section>
 
     <section id="regulamin">
-      <h2>📜Regulamin Ligi Delulu Racing</h2>
+      <h2>Regulamin Ligi</h2>
       <ol>
         <li>Zachowajmy większy szacunek dla siebie na torze, nie wpierdalajmy się na siłę, jesteś wolniejszy - czasem lepiej odpuścić pozycję i się utrzymywać w DRS niż na siłę się łokciami rozpychać.</li>
         <li>Zostawiajmy sobie miejsce na torze, każdy, nawet jeżeli się jedzie pierwszy, dobrze jest je zostawić.</li>
@@ -234,8 +495,19 @@
 
   <script>
     function showSection(id) {
-      document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
+      document.querySelectorAll('main section').forEach(sec => {
+        sec.classList.remove('active');
+      });
       document.getElementById(id).classList.add('active');
+    }
+
+    function toggleDrivers(card) {
+      const list = card.querySelector('.drivers-list');
+      if (list.classList.contains('open')) {
+        list.classList.remove('open');
+      } else {
+        list.classList.add('open');
+      }
     }
   </script>
 </body>
