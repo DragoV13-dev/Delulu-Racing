@@ -63,38 +63,23 @@
       color: white;
     }
 
-    /* Gradient z połyskiem */
     .gold td, .silver td, .bronze td {
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.5), 
-               0 0 5px rgba(255,255,255,0.4);
-}
+      color: #000;
+      text-shadow:
+        1px 1px 2px rgba(255,255,255,0.3),
+        0 0 5px rgba(0,0,0,0.7);
+    }
 
-.gold td {
-  background-image: 
-    linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0) 40%),
-    linear-gradient(135deg, #ffeb3b, #bfa700);
-  background-blend-mode: overlay;
-  color: #555555;
-  font-weight: bold;
-}
+    .gold td {
+      background: linear-gradient(135deg, #fff7b0, #bfa700);
+    }
 
-.silver td {
-  background-image: 
-    linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0) 40%),
-    linear-gradient(135deg, #e0e0e0, #8f8f8f);
-  background-blend-mode: overlay;
-  color: #444444;
-  font-weight: bold;
-}
+    .silver td {
+      background: linear-gradient(135deg, #e0e0e0, #8f8f8f);
+    }
 
-.bronze td {
-  background-image: 
-    linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0) 40%),
-    linear-gradient(135deg, #e09c57, #8a5325);
-  background-blend-mode: overlay;
-  color: #444444;
-  font-weight: bold;
-}
+    .bronze td {
+      background: linear-gradient(135deg, #e09c57, #8a5325);
     }
   </style>
 </head>
@@ -161,10 +146,9 @@
           </tr>
         </thead>
         <tbody>
-         <tr><th>Data</th><th>Tor</th></tr>
-        <tr><td>14.08.2025</td><td>Texas</td></tr>
-        <tr><td>17.08.2025</td><td>Meksyk</td></tr>
-        <tr><td>17.08.2025</td><td>Brazylia</td></tr>
+          <tr><td>14.08.2025</td><td>Texas</td></tr>
+          <tr><td>17.08.2025</td><td>Meksyk</td></tr>
+          <tr><td>17.08.2025</td><td>Brazylia</td></tr>
         </tbody>
       </table>
     </section>
