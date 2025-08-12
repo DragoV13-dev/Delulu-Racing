@@ -48,11 +48,54 @@
       border-collapse: collapse;
       width: 100%;
       margin-top: 1rem;
-      background-color: rgba(0,0,0,0.7);
+      background: transparent;
     }
-    table, th, td { border: 1px solid #c00; }
-    th, td { padding: 0.5rem; text-align: center; }
-    th { background-color: #222; }
+    table, th, td {
+      border: 1px solid #c00;
+    }
+    th, td {
+      padding: 0.5rem;
+      text-align: center;
+      background: transparent;
+    }
+    th {
+      background-color: #222;
+      color: white;
+    }
+
+    /* Gradient z połyskiem */
+    .gold td, .silver td, .bronze td {
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5), 
+               0 0 5px rgba(255,255,255,0.4);
+}
+
+.gold td {
+  background-image: 
+    linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0) 40%),
+    linear-gradient(135deg, #ffeb3b, #bfa700);
+  background-blend-mode: overlay;
+  color: #555555;
+  font-weight: bold;
+}
+
+.silver td {
+  background-image: 
+    linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0) 40%),
+    linear-gradient(135deg, #e0e0e0, #8f8f8f);
+  background-blend-mode: overlay;
+  color: #444444;
+  font-weight: bold;
+}
+
+.bronze td {
+  background-image: 
+    linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0) 40%),
+    linear-gradient(135deg, #e09c57, #8a5325);
+  background-blend-mode: overlay;
+  color: #444444;
+  font-weight: bold;
+}
+    }
   </style>
 </head>
 <body>
@@ -77,19 +120,52 @@
     <section id="tabela">
       <h2>Tabela punktowa zawodników</h2>
       <table>
-        <tr><th>Pozycja</th><th>Zawodnik</th><th>Punkty</th></tr>
-        <tr><td>1</td><td>Niko</td><td>120</td></tr>
-        <tr><td>2</td><td>Dastin</td><td>95</td></tr>
-        <tr><td>3</td><td>Pestek</td><td>80</td></tr>
+        <thead>
+          <tr>
+            <th>Pozycja</th>
+            <th>Zawodnik</th>
+            <th>Punkty</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="gold">
+            <td>1</td>
+            <td>Niko</td>
+            <td>150</td>
+          </tr>
+          <tr class="silver">
+            <td>2</td>
+            <td>Dastin</td>
+            <td>140</td>
+          </tr>
+          <tr class="bronze">
+            <td>3</td>
+            <td>Pestek</td>
+            <td>130</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Drago</td>
+            <td>120</td>
+          </tr>
+        </tbody>
       </table>
     </section>
     <section id="kalendarz">
       <h2>Kalendarz wyścigów</h2>
       <table>
-        <tr><th>Data</th><th>Tor</th></tr>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Tor</th>
+          </tr>
+        </thead>
+        <tbody>
+         <tr><th>Data</th><th>Tor</th></tr>
         <tr><td>14.08.2025</td><td>Texas</td></tr>
         <tr><td>17.08.2025</td><td>Meksyk</td></tr>
         <tr><td>17.08.2025</td><td>Brazylia</td></tr>
+        </tbody>
       </table>
     </section>
   </main>
